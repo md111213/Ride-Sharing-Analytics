@@ -1,0 +1,34 @@
+Ride-Sharing Analytics - Excel Stage (Stage 1 + Stage 2) - Final Workbook,,,
+Where each of the 24 Excel problems is answered. Green headers = derived (formula) columns; blue headers = source columns.,,,
+Problem,Topic,Where to find it,How it was done
+Stage 1,"Profiling, cleaning, assumptions","Cleaning_Log, Assumptions",26 documented checks; parameters in yellow cells
+1,Ride Revenue Calculation,Rides!N TotalAmount,Fare + Tip
+2,Ride Pricing Efficiency,Rides!O FarePerKm,Fare / Distance (guarded for 0)
+3,Low-Rated Ride Identification,"Rides!Q RatingCategory, R LowRatedFlag","Poor <=2, Average <=3.5, Good above (editable)"
+4,Revenue by Payment Channel,Q4_Payment_Revenue,SUMIFS + chart
+5,Rating Data Quality Check,"Q5_Rating_QC, Rides!P RatingCheck","COUNT vs COUNTA, range test"
+6,Connecting Ride and Driver Information,"Rides!S DriverName (also T city, U vehicle)",INDEX/MATCH on DriverID
+7,Customer Master Data Quality,"Q7_Duplicate_Users, Users!L:M",COUNTIF on UserID
+8,Successful Promotional Transactions,Q8_Promo_Success,"COUNTIFS PromoApplied=YES, Status=Success"
+9,Customer Name Standardization,"Users!G FirstName, H LastName",LEFT/MID with FIND
+10,Customer Identifier Creation,Users!I CustomerTag,"UPPER(LEFT(first,3))&RIGHT(UserID,4)"
+11,Customer Communication Identifier,Users!J Email,lower(first+last)@riderapp.com
+12,Time-Based Ride Analysis,Rides!V MonthName,"TEXT(date,""mmmm"")"
+13,Ride Recency Analysis,Rides!W DaysSinceRide,TODAY() - RideDate
+14,Customer Tenure Analysis,Users!K TenureDays,TODAY() - JoinDate
+15,Vehicle Revenue Comparison,Q15_Vehicle_Revenue,PivotTable-style SUMIFS + chart
+16,City-Vehicle Tip Analysis,Q16_City_Vehicle_Tip,AVERAGEIFS grid + sample sizes
+17,Driver Ride Activity,"Q17_Driver_Activity, Drivers!I:J","COUNTIFS per driver, ranked"
+18,Customer Rating Distribution,Q18_Rating_Distribution,COUNTIFS buckets + chart
+19,Promotional Revenue Comparison,Q19_Promo_Revenue,SUMIFS on Payments
+20,Customer Experience Exception Identification,"Rides (A, K, Q, R)",Conditional formatting: red when RatingCategory = Poor
+21,Fare Distribution Monitoring,Rides!I Fare,"3-colour scale (green low, red high)"
+22,Ride Duration Pattern Identification,"Rides!H Duration_min, AB DurationBand",Arrow icon set (Excel) + emoji band for Google Sheets
+23,Duplicate Customer Record Investigation,Users!A:F,Highlight where COUNTIF(UserID)>1
+24,High-Tipping Ride Identification,"Rides!Z TipPct, AA HighTipFlag; formatting on J, Z, AA",Rule: Tip/Fare > 20%
+Checkpoint,Excel Insight Checkpoint,Excel_Insights,"10 findings with live values, caveats and SQL follow-ups"
+,,,
+Notes,,,
+• Conditional formatting (Q20-Q24) is on the Rides and Users sheets. Icon sets (Q22) show in Excel but not in Google Sheets - use the AB DurationBand column there.,,,
+• TODAY()-based columns update each day; ride data runs 30-Jan-2025 to 31-Jul-2025.,,,
+"• This workbook is the cleaned working file for SQL and Power BI: export Rides, Drivers, Users, Payments, SupportTickets to CSV (File > Download > CSV) and keep the same column names.",,,
